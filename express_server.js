@@ -41,13 +41,13 @@ app.post("/urls", (req, res) => {
   res.redirect(`/urls/${shortURL}`);
 });
 
-app.post("/urls/login", (req, res) => {
+app.post("/login", (req, res) => {
   res
     .cookie("username", req.body.username)
     .redirect("back");
 });
 
-app.post("/urls/logout", (req, res) => {
+app.post("/logout", (req, res) => {
   res
     .clearCookie("username")
     .redirect("back");

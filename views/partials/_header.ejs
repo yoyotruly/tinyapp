@@ -13,12 +13,12 @@
     </div>
     <div>
       <% if (username) { %>
-        <form action="/urls/logout" method="post">
+        <form action="/logout" method="post">
           Logged in as: <%= username %>
           <button class="btn btn-outline-dark" style="margin-left: 0.5em">Logout</button>
         </form>
       <% } else { %>
-        <form class="form-inline" action="/urls/login" method="post">
+        <form class="form-inline" action="/login" method="post">
           <input class="form-control" type="text" name="username" placeholder="Username">
           <button class="btn btn-outline-dark" style="margin-left: 0.5em">Login</button>
         </form>
