@@ -44,13 +44,13 @@ app.post("/urls", (req, res) => {
 app.post("/urls/login", (req, res) => {
   res
     .cookie("username", req.body.username)
-    .redirect("/urls");
+    .redirect("back");
 });
 
 app.post("/urls/logout", (req, res) => {
   res
     .clearCookie("username")
-    .redirect("/urls");
+    .redirect("back");
 });
 
 app.get("/urls/new", (req, res) => {
