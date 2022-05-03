@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { generateRandomString } = require("../utils");
+const { generateRandomString, checkEmailExist } = require("../utils");
 const { users } = require("../constants");
 
 const router = express.Router();
@@ -16,6 +16,10 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const { email, password } = req.body;
   const id = generateRandomString();
+
+  if (!email || !password || checkEmailExist) {
+    return res.status(400).send("Registration information invalid");
+  }
 
   users[id] = {
     id,
