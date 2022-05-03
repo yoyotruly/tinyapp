@@ -56,6 +56,7 @@ app.post("/urls", (req, res) => {
   res.redirect(`/urls/${shortURL}`);
 });
 
+// TODO: need to change login to take email and password instead
 // app.post("/login", (req, res) => {
 //   res
 //     .cookie("username", req.body.username)
