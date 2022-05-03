@@ -56,15 +56,15 @@ app.post("/urls", (req, res) => {
   res.redirect(`/urls/${shortURL}`);
 });
 
-app.post("/login", (req, res) => {
-  res
-    .cookie("username", req.body.username)
-    .redirect("back");
-});
+// app.post("/login", (req, res) => {
+//   res
+//     .cookie("username", req.body.username)
+//     .redirect("back");
+// });
 
 app.post("/logout", (req, res) => {
   res
-    .clearCookie("username")
+    .clearCookie("id")
     .redirect("back");
 });
 
