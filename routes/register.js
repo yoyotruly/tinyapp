@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
     user: users[req.cookies.id]
   };
 
-  res.render("user_registration", templateVars);
+  res.render("register", templateVars);
 });
 
 router.post("/", (req, res) => {
