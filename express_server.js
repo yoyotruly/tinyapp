@@ -18,10 +18,12 @@ const urlDatabase = {
   "9sm5xK": "http://www.google.com"
 };
 
+// Home page
 app.get("/", (req, res) => {
   res.send("Hello");
 });
 
+// My URLs page
 app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
@@ -53,6 +55,7 @@ app.post("/logout", (req, res) => {
     .redirect("back");
 });
 
+// Create New URL page
 app.get("/urls/new", (req, res) => {
   const templateVars = {
     username: req.cookies.username
@@ -61,6 +64,7 @@ app.get("/urls/new", (req, res) => {
   res.render("urls_new", templateVars);
 });
 
+// Edit URL page
 app.get("/urls/:shortURL", (req, res) => {
   const templateVars = {
     shortURL: req.params.shortURL,
@@ -79,6 +83,7 @@ app.post("/urls/:shortURL", (req, res) => {
   res.redirect("/urls");
 });
 
+// Delete URL
 app.post("/urls/:shortURL/delete", (req, res) => {
   const shortURL = req.params.shortURL;
   delete urlDatabase[shortURL];
@@ -86,9 +91,16 @@ app.post("/urls/:shortURL/delete", (req, res) => {
   res.redirect("/urls");
 });
 
+// Redirect to original link
 app.get("/u/:shortURL", (req, res) => {
   const longURL = urlDatabase[req.params.shortURL];
   res.redirect(longURL);
+});
+
+// User Registration page
+app.get("/register", (req, res) => {
+  const templateVars = { username: req.cookies.username };
+  res.render("user_registration", templateVars);
 });
 
 app.listen(PORT, () => {
