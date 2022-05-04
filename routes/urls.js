@@ -34,7 +34,7 @@ router.get("/new", (req, res) => {
 // Edit URL page
 router
   .route("/:shortURL")
-  .get("/:shortURL", (req, res) => {
+  .get((req, res) => {
     const templateVars = {
       shortURL: req.params.shortURL,
       longURL: urlDatabase[req.params.shortURL],
@@ -42,7 +42,8 @@ router
     };
 
     res.render("urls_show", templateVars);
-  }).post("/:shortURL", (req, res) => {
+  })
+  .post((req, res) => {
     const shortURL = req.params.shortURL;
     const updatedLongURL = req.body.longURL;
     urlDatabase[shortURL] = updatedLongURL;
