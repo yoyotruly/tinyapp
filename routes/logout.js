@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.post("/", (req, res) => {
   res
-    .clearCookie("id")
+    .clearCookie("user_id")
     .redirect("back");
 });
 
