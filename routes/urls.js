@@ -5,49 +5,50 @@ const { urlDatabase, users } = require("../utils/constants");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  const templateVars = {
-    urls: urlDatabase,
-    user: users[req.cookies.id]
-  };
+router
+  .route("/")
+  .get((req, res) => {
+    const templateVars = {
+      urls: urlDatabase,
+      user: users[req.cookies.id]
+    };
 
-  res.render("urls_index", templateVars);
-});
+    res.render("urls_index", templateVars);
+  })
+  .post((req, res) => {
+    const shortURL = generateRandomString();
+    urlDatabase[shortURL] = req.body.longURL;
 
-router.post("/", (req, res) => {
-  const shortURL = generateRandomString();
-  urlDatabase[shortURL] = req.body.longURL;
-
-  res.redirect(`/urls/${shortURL}`);
-});
+    res.redirect(`/urls/${shortURL}`);
+  });
 
 // Create New URL page
 router.get("/new", (req, res) => {
   const templateVars = {
     user: users[req.cookies.id]
   };
-  
+
   res.render("urls_new", templateVars);
 });
 
 // Edit URL page
-router.get("/:shortURL", (req, res) => {
-  const templateVars = {
-    shortURL: req.params.shortURL,
-    longURL: urlDatabase[req.params.shortURL],
-    user: users[req.cookies.id]
-  };
+router
+  .route("/:shortURL")
+  .get("/:shortURL", (req, res) => {
+    const templateVars = {
+      shortURL: req.params.shortURL,
+      longURL: urlDatabase[req.params.shortURL],
+      user: users[req.cookies.id]
+    };
 
-  res.render("urls_show", templateVars);
-});
+    res.render("urls_show", templateVars);
+  }).post("/:shortURL", (req, res) => {
+    const shortURL = req.params.shortURL;
+    const updatedLongURL = req.body.longURL;
+    urlDatabase[shortURL] = updatedLongURL;
 
-router.post("/:shortURL", (req, res) => {
-  const shortURL = req.params.shortURL;
-  const updatedLongURL = req.body.longURL;
-  urlDatabase[shortURL] = updatedLongURL;
-
-  res.redirect("/urls");
-});
+    res.redirect("/urls");
+  });
 
 // Delete URL
 router.post("/:shortURL/delete", (req, res) => {
