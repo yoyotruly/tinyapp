@@ -10,7 +10,6 @@ const checkEmailExist = (email) => {
   return emailRecords.includes(email);
 };
 
-
 module.exports = {
   generateRandomString,
   checkEmailExist

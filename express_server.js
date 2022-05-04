@@ -8,7 +8,7 @@ const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
 const logoutRoutes = require("./routes/logout");
 
-const { urlDatabase } = require("./constants");
+const { urlDatabase } = require("./utils/constants");
 
 const app = express();
 const PORT = 8080;

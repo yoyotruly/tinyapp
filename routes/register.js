@@ -1,16 +1,12 @@
 const express = require("express");
 
-const { generateRandomString, checkEmailExist } = require("../utils");
-const { users } = require("../constants");
+const { generateRandomString, checkEmailExist } = require("../utils/utils");
+const { users } = require("../utils/constants");
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  const templateVars = {
-    user: users[req.cookies.id]
-  };
-
-  res.render("register", templateVars);
+  res.render("register");
 });
 
 router.post("/", (req, res) => {

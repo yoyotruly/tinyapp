@@ -1,7 +1,7 @@
 const express = require("express");
 
-const { generateRandomString } = require("../utils");
-const { urlDatabase, users } = require("../constants");
+const { generateRandomString } = require("../utils/utils");
+const { urlDatabase, users } = require("../utils/constants");
 
 const router = express.Router();
 
