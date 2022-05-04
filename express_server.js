@@ -8,6 +8,7 @@ const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
 const logoutRoutes = require("./routes/logout");
 
+const { findUserById } = require("./utils/utils");
 const { urlDatabase } = require("./utils/constants");
 
 const app = express();
@@ -16,6 +17,15 @@ const PORT = 8080;
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use((req, res, next) => {
+  const userId = req.cookies.user_id;
+  if (!userId) return next();
+
+  const user = findUserById(userId);
+  res.locals.user = user ? user : undefined;
+  next();
+});
 
 app.use("/", indexRoutes);
 app.use("/urls", urlsRoutes);
