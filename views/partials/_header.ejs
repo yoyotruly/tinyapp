@@ -12,8 +12,14 @@
       </div>
     </div>
     <div>
-      <a class="btn btn-warning" href="/register">Register</a>
-      <a class="btn btn-outline-dark" href="/login">Login</a>
+      <% if (user) { %> 
+        Logged in as <%= user.email %>
+        <a class="btn btn-outline-dark" href="/logout">Logout</a>
+      <% } else { %>
+        <a class="btn btn-warning" href="/register">Register</a>
+        <a class="btn btn-outline-dark" href="/login">Login</a>
+      <% } %> 
+      
     </div>
   </nav>
 </header>
