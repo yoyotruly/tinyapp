@@ -7,10 +7,10 @@ const router = express.Router();
 
 router
   .route("/")
-  .get("/", (req, res) => {
+  .get((req, res) => {
     res.render("register");
   })
-  .post("/", (req, res) => {
+  .post((req, res) => {
     const { email, password } = req.body;
     const id = generateRandomString();
     
