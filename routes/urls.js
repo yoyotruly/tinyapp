@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { generateRandomString } = require("../utils/utils");
-const { urlDatabase, users } = require("../utils/constants");
+const { urlDatabase } = require("../utils/constants");
 
 const router = express.Router();
 
@@ -9,8 +9,7 @@ router
   .route("/")
   .get((req, res) => {
     const templateVars = {
-      urls: urlDatabase,
-      user: users[req.cookies.id]
+      urls: urlDatabase
     };
 
     res.render("urls_index", templateVars);
@@ -24,11 +23,7 @@ router
 
 // Create New URL page
 router.get("/new", (req, res) => {
-  const templateVars = {
-    user: users[req.cookies.id]
-  };
-
-  res.render("urls_new", templateVars);
+  res.render("urls_new");
 });
 
 // Edit URL page
@@ -38,7 +33,6 @@ router
     const templateVars = {
       shortURL: req.params.shortURL,
       longURL: urlDatabase[req.params.shortURL],
-      user: users[req.cookies.id]
     };
 
     res.render("urls_show", templateVars);
