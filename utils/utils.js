@@ -16,21 +16,31 @@ const checkEmailExist = (email) => {
  * @param {string} email Email
  * @param {string} password Password
  * @returns {*} Returns user object if input email and password match user's
- * record, returns false otherwise
+ * record, otherwise returns undefined
  */
-const findUser = (email, password) => {
-  if (!email || !password) return false;
+const findUserByLogin = (email, password) => {
+  if (!email || !password) return undefined;
   
-  const user = Object.values(users)
+  return Object.values(users)
     .find((user) => (user.email === email && user.password === password));
+};
 
-  if (!user) return false;
+/**
+ * Check if a user is valid with provided user id, return the user object if it
+ * is valid.
+ * @param {string} id User ID
+ * @returns {*} Returns user object if id matches record, otherwise returns
+ * undefine
+ */
+const findUserById = (id) => {
+  if (!id) return false;
 
-  return user;
+  return users[id];
 };
 
 module.exports = {
   generateRandomString,
   checkEmailExist,
-  findUser
+  findUserByLogin,
+  findUserById
 };
