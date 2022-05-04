@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { findUser } = require("../utils/utils");
+const { findUserByLogin } = require("../utils/utils");
 
 const router = express.Router();
 
@@ -11,8 +11,8 @@ router
   })
   .post((req, res) => {
     const { email, password } = req.body;
-    const user = findUser(email, password);
-    
+    const user = findUserByLogin(email, password);
+
     if (!user) return res.status(403).send("Oops, user doesn't exist");
     
     res
