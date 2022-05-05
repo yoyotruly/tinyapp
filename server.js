@@ -19,11 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use((req, res, next) => {
-  const userId = req.cookies.user_id;
-  if (!userId) return next();
-
-  const user = findUserById(userId);
-  res.locals.user = user ? user : undefined;
+  const user = findUserById(req.cookies.user_id);
+  res.locals = { user };
   next();
 });
 
