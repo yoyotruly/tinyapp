@@ -1,4 +1,4 @@
-const { users } = require("./constants");
+const { users, urlDatabase } = require("./constants");
 
 const generateRandomString = () => {
   return "x2Az3";
@@ -36,7 +36,7 @@ const findUserByLogin = (email, password) => {
  * undefine
  */
 const findUserById = (id) => {
-  if (!id) return false;
+  if (!id) return undefined;
 
   return users[id];
 };
