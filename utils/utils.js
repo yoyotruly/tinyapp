@@ -18,7 +18,7 @@ const isExistingEmail = (email) => {
  * object if it is valid.
  * @param {string} email Email
  * @param {string} password Password
- * @returns {*} Returns user object if input email and password match user's
+ * @returns {?Object} Returns user object if input email and password match user's
  * record, otherwise returns undefined
  */
 const findUserByLogin = (email, password) => {
@@ -32,15 +32,20 @@ const findUserByLogin = (email, password) => {
  * Check if a user is valid with provided user id, return the user object if it
  * is valid.
  * @param {string} id User ID
- * @returns {*} Returns user object if id matches record, otherwise returns
+ * @returns {?Object} Returns user object if id matches records, returns undefined if
+ * id doesn't exist or doesn't match records
  * undefine
  */
 const findUserById = (id) => {
-  if (!id) return undefined;
-
-  return users[id];
+  return id && users[id];
 };
 
+/**
+ * Find original long URL by shortened URL.
+ * @param {string} shortURL Shortened URL
+ * @returns {?string} Returns original long URL if shortURL matches records,
+ * returns undefined otherwise
+ */
 const findLongURL = (shortURL) => {
   return urlDatabase[shortURL] && urlDatabase[shortURL].longURL;
 };
