@@ -50,10 +50,29 @@ const findLongURL = (shortURL) => {
   return urlDatabase[shortURL] && urlDatabase[shortURL].longURL;
 };
 
+/**
+ * Filter url database and return only urls created by userId.
+ * @param {string} userId User Id
+ * @returns {Array} Returns an array or urls object, e.g.
+ * [
+ *   { shortURL: 'a1b2', longURL: 'https://www.google.com' },
+ *   { shortURL: 'c3d4', longURL: 'https://www.youtube.com/' },
+ * ]
+ */
+const findUrlsByUserId = (userId) => {
+  return Object.entries(urlDatabase)
+    .filter(url => url[1].userId === userId)
+    .map(url => ({
+      "shortURL": url[0],
+      "longURL": url[1].longURL
+    }));
+};
+
 module.exports = {
   generateRandomString,
   isExistingEmail,
   findUserByLogin,
   findUserById,
-  findLongURL
+  findLongURL,
+  findUrlsByUserId
 };
