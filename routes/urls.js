@@ -26,7 +26,12 @@ router
   })
   .post(isUserLoggedIn, (req, res) => {
     const shortURL = generateRandomString();
-    urlDatabase[shortURL] = req.body.longURL;
+    urlDatabase[shortURL] = {
+      longURL: req.body.longURL,
+      userId: req.cookies.user_id
+    };
+
+    console.log(urlDatabase);
 
     res.redirect(`/urls/${shortURL}`);
   });
@@ -40,24 +45,33 @@ router.get("/new", isUserLoggedIn, (req, res) => {
 router
   .route("/:shortURL")
   .get(isUserLoggedIn, (req, res) => {
+    const { shortURL } = req.params;
+    const { longURL } = urlDatabase[shortURL];
+
     const templateVars = {
-      shortURL: req.params.shortURL,
-      longURL: urlDatabase[req.params.shortURL],
+      shortURL,
+      longURL
     };
 
     res.render("urls_show", templateVars);
   })
   .post(isUserLoggedIn, (req, res) => {
-    const shortURL = req.params.shortURL;
-    const updatedLongURL = req.body.longURL;
-    urlDatabase[shortURL] = updatedLongURL;
+    const { shortURL } = req.params;
+    const { longURL } = req.body;
+    const userId = req.cookies.user_id;
+
+    urlDatabase[shortURL] = {
+      longURL,
+      userId
+    };
 
     res.redirect("/urls");
   });
 
 // Delete URL
 router.post("/:shortURL/delete", isUserLoggedIn, (req, res) => {
-  const shortURL = req.params.shortURL;
+  const { shortURL } = req.params;
+  
   delete urlDatabase[shortURL];
 
   res.redirect("/urls");

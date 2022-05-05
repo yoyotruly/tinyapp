@@ -32,7 +32,7 @@ app.use("/logout", logoutRoutes);
 
 // Redirect to original link
 app.get("/u/:shortURL", (req, res) => {
-  const longURL = urlDatabase[req.params.shortURL];
+  const { longURL } = urlDatabase[req.params.shortURL];
   res.redirect(longURL);
 });
 
