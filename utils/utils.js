@@ -41,9 +41,14 @@ const findUserById = (id) => {
   return users[id];
 };
 
+const findLongURL = (shortURL) => {
+  return urlDatabase[shortURL] && urlDatabase[shortURL].longURL;
+};
+
 module.exports = {
   generateRandomString,
   isExistingEmail,
   findUserByLogin,
-  findUserById
+  findUserById,
+  findLongURL
 };
