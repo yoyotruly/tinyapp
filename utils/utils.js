@@ -4,10 +4,13 @@ const generateRandomString = () => {
   return "x2Az3";
 };
 
-const checkEmailExist = (email) => {
-  const emailRecords = Object.values(users).map(x => x.email);
-
-  return emailRecords.includes(email);
+/**
+ * Check if the input email has already been registered.
+ * @param {string} email Email
+ * @returns {boolean} Returns true if email already exists, otherwise returns false
+ */
+const isExistingEmail = (email) => {
+  return Object.values(users).map(user => user.email).includes(email);
 };
 
 /**
@@ -40,7 +43,7 @@ const findUserById = (id) => {
 
 module.exports = {
   generateRandomString,
-  checkEmailExist,
+  isExistingEmail,
   findUserByLogin,
   findUserById
 };

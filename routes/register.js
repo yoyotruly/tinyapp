@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { generateRandomString, checkEmailExist } = require("../utils/utils");
+const { generateRandomString, isExistingEmail } = require("../utils/utils");
 const { users } = require("../utils/constants");
 
 const router = express.Router();
@@ -15,7 +15,7 @@ router
     const id = generateRandomString();
     
     if (!email || !password) return res.status(400).send("Registration information invalid");
-    if (checkEmailExist) return res.status(400).send("User already exists.");
+    if (isExistingEmail) return res.status(400).send("Email already exists.");
   
     users[id] = {
       id,
