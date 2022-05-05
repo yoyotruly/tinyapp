@@ -10,10 +10,11 @@ const isUserLoggedIn = ((req, res, next) => {
     return res
       .status(400)
       .render("login");
-    // TODO: need to display relevant error message
   }
   next();
 });
+
+router.use(isUserLoggedIn);
 
 router
   .route("/")
@@ -24,7 +25,7 @@ router
 
     res.render("urls_index", templateVars);
   })
-  .post(isUserLoggedIn, (req, res) => {
+  .post((req, res) => {
     const shortURL = generateRandomString();
     urlDatabase[shortURL] = {
       longURL: req.body.longURL,
@@ -37,14 +38,14 @@ router
   });
 
 // Create New URL page
-router.get("/new", isUserLoggedIn, (req, res) => {
+router.get("/new", (req, res) => {
   res.render("urls_new");
 });
 
 // Edit URL page
 router
   .route("/:shortURL")
-  .get(isUserLoggedIn, (req, res) => {
+  .get((req, res) => {
     const { shortURL } = req.params;
     const { longURL } = urlDatabase[shortURL];
 
@@ -55,7 +56,7 @@ router
 
     res.render("urls_show", templateVars);
   })
-  .post(isUserLoggedIn, (req, res) => {
+  .post((req, res) => {
     const { shortURL } = req.params;
     const { longURL } = req.body;
     const userId = req.cookies.user_id;
@@ -69,7 +70,7 @@ router
   });
 
 // Delete URL
-router.post("/:shortURL/delete", isUserLoggedIn, (req, res) => {
+router.post("/:shortURL/delete", (req, res) => {
   const { shortURL } = req.params;
   
   delete urlDatabase[shortURL];
