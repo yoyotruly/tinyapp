@@ -46,7 +46,7 @@ const findUserById = (id) => {
  * @returns {?string} Returns original long URL if shortURL matches records,
  * returns undefined otherwise
  */
-const findLongURL = (shortURL) => {
+const findLongUrlByShortUrl = (shortURL) => {
   return urlDatabase[shortURL] && urlDatabase[shortURL].longURL;
 };
 
@@ -73,6 +73,6 @@ module.exports = {
   isExistingEmail,
   findUserByLogin,
   findUserById,
-  findLongURL,
+  findLongUrlByShortUrl,
   findUrlsByUserId
 };
