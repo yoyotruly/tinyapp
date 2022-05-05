@@ -1,22 +1,22 @@
 const urlDatabase = {
   "b2xVn2": {
-    longURL: "http://www.lighthouselabs.ca",
+    longURL: "https://www.lighthouselabs.ca",
     userId: "u1"
   },
   "a1Ea5x": {
-    longURL: "",
+    longURL: "https://www.youtube.com/",
     userId: "u1"
   },
   "ty5W3Q": {
-    longURL: "",
+    longURL: "https://www.facebook.com",
     userId: "u1"
   },
   "9aiU7q": {
-    longURL: "",
+    longURL: "https://www.airbnb.ca/",
     userId: "u2"
   },
   "9sm5xK": {
-    longURL: "http://www.google.com",
+    longURL: "https://www.google.com",
     userId: "u2"
   },
 };
