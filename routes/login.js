@@ -13,7 +13,7 @@ router
     const { email, password } = req.body;
     const user = findUserByLogin(email, password);
 
-    if (!user) return res.status(403).send("Oops, user doesn't exist");
+    if (!user) return res.status(403).send("Invalid email or password");
     
     res
       .cookie("user_id", user.id)
