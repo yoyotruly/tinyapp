@@ -125,6 +125,17 @@ const deleteUrl = (shortURL) => {
 };
 
 /**
+ * (Internal helper function) Hash password with bcrypt algorithm.
+ * @param {string} password Password
+ * @returns {string} Returns hashed password
+ */
+const _hashPassword = (password) => {
+  const bcrypt = require('bcryptjs');
+
+  return bcrypt.hashSync(password, 10);
+};
+
+/**
  * Add new user to database and returns user ID.
  * @param {string} email Email user provided during registration
  * @param {string} password Password user provided during registration
@@ -132,11 +143,12 @@ const deleteUrl = (shortURL) => {
  */
 const addNewUserToDb = (email, password) => {
   const id = `u${Object.keys(users).length + 1}`;
+  const hashedPassword = _hashPassword(password);
   
   users[id] = {
     id,
     email,
-    password
+    hashedPassword
   };
 
   return id;
