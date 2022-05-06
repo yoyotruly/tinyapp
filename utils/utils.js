@@ -38,18 +38,22 @@ const isUserAuthorized = (userId, value, lookupBy = "shortURL") => {
 };
 
 /**
- * Check if a user is valid with provided email and password, return the user
- * object if it is valid.
+ * Find user info by email and password.
  * @param {string} email Email
  * @param {string} password Password
- * @returns {?Object} Returns user object if input email and password match user's
- * record, otherwise returns undefined
+ * @returns {?Object} Returns user object if email and password match user's
+ * record, otherwise returns false
  */
 const findUserByLogin = (email, password) => {
-  if (!email || !password) return undefined;
-  
-  return Object.values(users)
-    .find((user) => (user.email === email && user.password === password));
+  if (!email || !password) return false;
+
+  const user = Object.values(users).find((user) => {
+    return user.email === email && bcrypt.compareSync(password, user.password);
+  });
+
+  if (!user) return false;
+
+  return user;
 };
 
 /**
