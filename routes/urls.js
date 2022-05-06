@@ -18,7 +18,7 @@ const isUserLoggedIn = ((req, res, next) => {
 const filterUrls = ((req, res, next) => {
   const urls = findUrlsByUserId(req.cookies.user_id);
   res.locals.urls = urls;
-  
+
   next();
 });
 
@@ -36,8 +36,6 @@ router
       longURL: req.body.longURL,
       userId: req.cookies.user_id
     };
-
-    console.log(urlDatabase);
 
     res.redirect(`/urls/${shortURL}`);
   });
