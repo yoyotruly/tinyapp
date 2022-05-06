@@ -41,6 +41,8 @@ const blockUnauthorizedUser = (req, res, next) => {
 router.use(blockVisitor);
 router.use(filterUrls);
 
+router.param("shortURL", blockUnauthorizedUser);
+
 router
   .route("/")
   .get((req, res) => {
@@ -62,7 +64,7 @@ router.get("/new", (req, res) => {
 // Edit URL page
 router
   .route("/:shortURL")
-  .get(blockUnauthorizedUser, (req, res) => {
+  .get((req, res) => {
     const { shortURL } = req.params;
     const longURL = findLongUrlByShortUrl(shortURL);
 
@@ -73,7 +75,7 @@ router
 
     res.render("urls_show", templateVars);
   })
-  .post(blockUnauthorizedUser, (req, res) => {
+  .post((req, res) => {
     const { shortURL } = req.params;
     const { longURL } = req.body;
     modifyLongUrl(shortURL, longURL);
@@ -82,7 +84,7 @@ router
   });
 
 // Delete URL
-router.post("/:shortURL/delete", blockUnauthorizedUser, (req, res) => {
+router.post("/:shortURL/delete", (req, res) => {
   deleteUrl(req.params.shortURL);
 
   res.redirect("/urls");
