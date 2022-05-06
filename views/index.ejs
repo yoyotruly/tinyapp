@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <title>New URL - TinyApp Example</title>
+  </head>
+
+  <body>
+
+  <%- include("partials/_header") %>
+    
+  <main>
+    <div class="container col-xxl-8 px-4 py-5">
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-6 .offset-lg-1 p-2 shadow-lg">
+          <img class="rounded-lg-3" src="https://www.swipez.in/images/product/url-shortener/features/flexible-pricing.svg" alt="" width="600">
+        </div>
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold lh-1 mb-3">Short links, big results</h1>
+          <p class="lead">A URL shortener built with ❤️ to help you grow and protect your brand.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <% if (locals.user) { %>
+              <a href="/urls/new" class="btn btn-primary btn-lg px-4 me-md-2">Get Started for Free</a>
+              <% } else { %> 
+              <a href="/register" class="btn btn-primary btn-lg px-4 me-md-2">Get Started for Free</a>
+              <% } %> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
