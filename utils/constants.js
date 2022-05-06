@@ -25,12 +25,12 @@ const users = {
   u1: {
     id: "u1",
     email: "user@example.com",
-    password: "purple-monkey-dinosaur"
+    password: "$2a$10$fVkM8H6Pg93GuctBKz/GgOduNV86yB2WVXpZgD9fsdiu20amQmOkq" // purple-monkey-dinosaur
   },
   u2: {
     id: "u2",
     email: "user2@example.com",
-    password: "dishwasher-funk"
+    password: "$2a$10$Q5vF64y83RTKBjIwMuiykexzOzHyP4QaHQ3ZnCwqYPwzH78Z19xnC" // dishwasher-funk
   }
 };
 
