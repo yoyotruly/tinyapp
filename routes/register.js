@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { blockInvalidRegistration } = require("../middlewares/register");
+const { validateRegistration } = require("../middlewares/register");
 const { addNewUserToDb } = require("../utils/utils");
 
 const router = express.Router();
@@ -11,7 +11,7 @@ router
   .get((req, res) => {
     res.render("register");
   })
-  .post(blockInvalidRegistration, (req, res) => {
+  .post(validateRegistration, (req, res) => {
     const { email, password } = req.body;
     const userId = addNewUserToDb(email, password);
   

@@ -1,13 +1,13 @@
 const { isExistingEmail } = require("../utils/utils");
 
-const blockInvalidRegistration = (req, res, next) => {
+const validateRegistration = (req, res, next) => {
   const { email, password } = req.body;
     
   if (!email || !password) {
     return res
       .status(400)
       .render("register", {
-        message: "Email and password cannot be empty."
+        message: "Email or password cannot be empty."
       });
   }
 
@@ -22,5 +22,5 @@ const blockInvalidRegistration = (req, res, next) => {
   next();
 };
 
-module.exports = { blockInvalidRegistration };
+module.exports = { validateRegistration };
   
