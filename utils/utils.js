@@ -68,11 +68,58 @@ const findUrlsByUserId = (userId) => {
     }));
 };
 
+/** Add new url record to database.
+ * @param {string} userId Current user's ID
+ * @param {string} longURL Original URL
+ * @returns {string} Returns the short URL system assigned to the original URL
+ */
+const addNewUrlToDb = (userId, longURL) => {
+  const shortURL = generateRandomString();
+  urlDatabase[shortURL] = {
+    longURL,
+    userId
+  };
+
+  return shortURL;
+};
+
+/**
+ * Modify original URL in database.
+ * @param {string} shortURL Short URL for this record
+ * @param {string} updatedLongURL New long URL user provided
+ * @returns None
+ */
+const modifyLongUrl = (shortURL, updatedLongURL) => {
+  urlDatabase[shortURL].longURL = updatedLongURL;
+};
+
+/**
+ * Check if a user is authorized to check or perform actions on certain urls.
+ * @param {string} userId The ID user logged in as
+ * @param {string} value The value to look up
+ * @param {string} [lookupBy=shortURL] Which property to look up by
+ * @returns {Boolean} Returns true if current user matches record, returns false
+ * otherwise
+ */
+const isUserAuthorized = (userId, value, lookupBy = "shortURL") => {
+  let recordUserId;
+
+  switch (lookupBy) {
+  case "shortURL":
+    recordUserId = urlDatabase[value].userId;
+  }
+
+  return userId === recordUserId;
+};
+
 module.exports = {
   generateRandomString,
   isExistingEmail,
   findUserByLogin,
   findUserById,
   findLongUrlByShortUrl,
-  findUrlsByUserId
+  findUrlsByUserId,
+  addNewUrlToDb,
+  modifyLongUrl,
+  isUserAuthorized
 };
