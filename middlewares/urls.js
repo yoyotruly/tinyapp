@@ -32,7 +32,7 @@ const blockUnauthorizedUser = (req, res, next) => {
   const shortURL = req.params.shortURL;
 
   if (!isUserAuthorized(userId, shortURL)) {
-    return res.status(404).send("404. Page Not Found");
+    return res.status(404).render("404");
   }
   
   next();

@@ -33,7 +33,7 @@ app.use("/logout", logoutRoutes);
 app.get("/u/:shortURL", (req, res) => {
   const longURL = findLongUrlByShortUrl(req.params.shortURL);
   
-  if (!longURL) return res.status(404).send("Invalid link");
+  if (!longURL) return res.status(404).render("404");
 
   res.redirect(longURL);
 });
