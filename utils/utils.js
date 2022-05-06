@@ -18,6 +18,25 @@ const isExistingEmail = (email) => {
 };
 
 /**
+ * Check if a user is authorized to check or perform actions on certain urls.
+ * @param {string} userId The ID user logged in as
+ * @param {string} value The value to look up
+ * @param {string} [lookupBy=shortURL] Which property to look up by
+ * @returns {Boolean} Returns true if current user matches record, returns false
+ * otherwise
+ */
+const isUserAuthorized = (userId, value, lookupBy = "shortURL") => {
+  let recordUserId;
+  
+  switch (lookupBy) {
+  case "shortURL":
+    recordUserId = urlDatabase[value] && urlDatabase[value].userId;
+  }
+
+  return userId === recordUserId;
+};
+
+/**
  * Check if a user is valid with provided email and password, return the user
  * object if it is valid.
  * @param {string} email Email
@@ -105,34 +124,15 @@ const deleteUrl = (shortURL) => {
   delete urlDatabase[shortURL];
 };
 
-/**
- * Check if a user is authorized to check or perform actions on certain urls.
- * @param {string} userId The ID user logged in as
- * @param {string} value The value to look up
- * @param {string} [lookupBy=shortURL] Which property to look up by
- * @returns {Boolean} Returns true if current user matches record, returns false
- * otherwise
- */
-const isUserAuthorized = (userId, value, lookupBy = "shortURL") => {
-  let recordUserId;
-  
-  switch (lookupBy) {
-  case "shortURL":
-    recordUserId = urlDatabase[value] && urlDatabase[value].userId;
-  }
-
-  return userId === recordUserId;
-};
-
 module.exports = {
   generateRandomString,
   isExistingEmail,
+  isUserAuthorized,
   findUserByLogin,
   findUserById,
   findLongUrlByShortUrl,
   findUrlsByUserId,
   addNewUrlToDb,
   modifyLongUrl,
-  isUserAuthorized,
   deleteUrl
 };
