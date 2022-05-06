@@ -11,7 +11,7 @@ const { urlDatabase } = require("../utils/constants");
 
 const router = express.Router();
 
-const isUserLoggedIn = ((req, res, next) => {
+const blockVisitor = ((req, res, next) => {
   if (!req.cookies.user_id) {
     return res
       .status(400)
@@ -39,7 +39,7 @@ const blockUnauthorizedUser = (req, res, next) => {
   next();
 };
 
-router.use(isUserLoggedIn);
+router.use(blockVisitor);
 router.use(filterUrls);
 
 router
