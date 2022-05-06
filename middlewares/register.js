@@ -1,5 +1,8 @@
 const { isExistingEmail } = require("../utils/utils");
 
+/**
+ * Check if the email and password user provided at registration is valid.
+ */
 const validateRegistration = (req, res, next) => {
   const { email, password } = req.body;
     
