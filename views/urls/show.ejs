@@ -14,11 +14,13 @@
     <div class="card-header"></div>
     <div class="card-body">
       <h5 class="card-title">
-        TinyURL for
-        <img src="https://www.google.com/s2/favicons?sz=64&domain_url=<%= longURL %>" loading="lazy" class="url-logo" style="height: 30px; width: 30px; min-width: 30px; margin-left: 0.3em; margin-right: 0.3em;">
-        <%= longURL %></h5>
+        Your new TinyURL: <a href="/u/<%= shortURL %>" target="_blank">/u/<%= shortURL %></a>
       </h5>
-      <p class="card-text">Short URL: <a href="/u/<%= shortURL %>" target="_blank">/u/<%= shortURL %></a></p>
+      <p class="card-text text-secondary">
+        <img src="https://www.google.com/s2/favicons?sz=64&domain_url=<%= longURL %>" loading="lazy" class="url-logo" style="height: 24px; width: 24px; min-width: 24px; margin-left: 0.3em; margin-right: 0.3em;">
+        <%= longURL %>
+      <p>
+
     </div>
     <div class="card-footer text-muted">
       <h5>Edit</h5>
