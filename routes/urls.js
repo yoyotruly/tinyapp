@@ -13,7 +13,7 @@ router.param("shortURL", blockUnauthorizedUser);
 router
   .route("/")
   .get((req, res) => {
-    res.render("urls_index");
+    res.render("urls/index");
   })
   .post((req, res) => {
     const userId = req.cookies.user_id;
@@ -25,7 +25,7 @@ router
 
 /* ------ Create New URL Page ------ */
 router.get("/new", (req, res) => {
-  res.render("urls_new");
+  res.render("urls/new");
 });
 
 /* ------ Edit URL ------ */
@@ -35,7 +35,7 @@ router
     const { shortURL } = req.params;
     const longURL = findLongUrlByShortUrl(shortURL);
 
-    res.render("urls_show", { shortURL, longURL });
+    res.render("urls/show", { shortURL, longURL });
   })
   .post((req, res) => {
     const { shortURL } = req.params;
