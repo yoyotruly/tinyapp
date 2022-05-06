@@ -35,16 +35,12 @@ router
     const { shortURL } = req.params;
     const longURL = findLongUrlByShortUrl(shortURL);
 
-    const templateVars = {
-      shortURL,
-      longURL
-    };
-
-    res.render("urls_show", templateVars);
+    res.render("urls_show", { shortURL, longURL });
   })
   .post((req, res) => {
     const { shortURL } = req.params;
     const { longURL } = req.body;
+    
     modifyLongUrl(shortURL, longURL);
 
     res.redirect("/urls");
