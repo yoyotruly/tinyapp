@@ -1,5 +1,5 @@
 const express = require("express");
-const { findUserByLogin } = require("../utils/utils");
+const { authenticateLogin } = require("../middlewares/login");
 
 const router = express.Router();
 
@@ -9,14 +9,9 @@ router
   .get((req, res) => {
     res.render("login");
   })
-  .post((req, res) => {
-    const { email, password } = req.body;
-    const user = findUserByLogin(email, password);
-
-    if (!user) return res.status(403).send("Invalid email or password");
-    
+  .post(authenticateLogin, (req, res) => {
     res
-      .cookie("user_id", user.id)
+      .cookie("user_id", req.userId)
       .redirect("/urls");
   });
 
