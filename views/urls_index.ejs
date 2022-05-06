@@ -25,8 +25,13 @@
       <tbody>
         <% urls.forEach(url => { %>
           <tr>
-            <td><%= url.shortURL %></td>
-            <td><%= url.longURL %></td>
+            <td>
+              <a href="/u/<%= url.shortURL %>" target="_blank">/u/<%= url.shortURL %></a>
+            </td>
+            <td>
+              <img src="https://www.google.com/s2/favicons?sz=64&amp;domain_url=<%= url.longURL %>" loading="lazy" class="url-logo" style="height: 24px; width: 24px; min-width: 24px; margin-right: 4px;">
+              <%= url.longURL %>
+            </td>
             <td>
               <form action="/urls/<%= url.shortURL %>" method="get">
                 <button class="btn btn-outline-primary">Edit</button>
