@@ -10,7 +10,7 @@ const {
 
 const router = express.Router();
 
-const blockVisitor = ((req, res, next) => {
+const requireLogin = ((req, res, next) => {
   if (!req.cookies.user_id) {
     return res
       .status(400)
@@ -38,7 +38,7 @@ const blockUnauthorizedUser = (req, res, next) => {
   next();
 };
 
-router.use(blockVisitor);
+router.use(requireLogin);
 router.use(filterUrls);
 
 router.param("shortURL", blockUnauthorizedUser);
