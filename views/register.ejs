@@ -12,31 +12,36 @@
 
   <%- include("partials/_header") %>
 
-  <main style="margin: 1em;">
+  <main style="margin: 2em;">
 
-    <% if (locals.message) { %>
-      <div class="alert alert-danger" role="alertdialog">
-        <%= locals.message %> 
+    <div class="d-flex align-items-center flex-column">
+
+      <% if (locals.message) { %>
+        <div class="alert alert-danger" role="alert" style="width: 350px">
+          <%= locals.message %> 
+        </div>
+      <% } %>
+
+      <div style="margin-top: 1em;">
+        <h3>Sign up and start shortening</h3>
       </div>
-    <% } %>
 
-    <div style="margin-top: 2em; margin-bottom: 1em;">
-      <h3>Sign up and start shortening</h3>
-    </div>
-    <div style="margin-bottom: 0.5em;">
-      <span class="text-muted">Already have an account?</span>
-      <a href="/login"><u>Log in</u></a>
-    </div>
+      <div style="margin-top: 0.5em; margin-bottom: 1em;">
+        <span class="text-muted">Already have an account?</span>
+        <a href="/login"><u>Log in</u></a>
+      </div>
 
-    <form action="/register" method="post">
-      <fieldset>
-        <label for="email" class="col-form-label">Email</label>        
-        <input class="form-control" type="email" name="email" placeholder="name@example.com" style="width: 300px">
-        <label for="password" class="col-form-label">Password</label>
-        <input class="form-control" type="password" name="password" style="width: 300px">
-        <button class="btn btn-primary" type="submit" style="margin-top: 1em;">Sign up</button>
-      </fieldset>
-    </form>
+      <form action="/register" method="post">
+        <fieldset>
+          <label for="email" class="col-form-label">Email</label>        
+          <input class="form-control" type="email" name="email" placeholder="name@example.com" style="width: 350px">
+          <label for="password" class="col-form-label">Password</label>
+          <input class="form-control" type="password" name="password" style="width: 350px">
+          <button class="btn btn-primary" type="submit" style="width: 350px; margin-top: 1em;">Sign up</button>
+        </fieldset>
+      </form>
+
+    </div>
 
   </main>
 
