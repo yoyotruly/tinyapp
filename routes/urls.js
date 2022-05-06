@@ -1,6 +1,12 @@
 const express = require("express");
 
-const { generateRandomString, findUrlsByUserId } = require("../utils/utils");
+const {
+  findUrlsByUserId,
+  findLongUrlByShortUrl,
+  addNewUrlToDb,
+  modifyLongUrl,
+  isUserAuthorized
+} = require("../utils/utils");
 const { urlDatabase } = require("../utils/constants");
 
 const router = express.Router();
@@ -22,6 +28,17 @@ const filterUrls = ((req, res, next) => {
   next();
 });
 
+const blockUnauthorizedUser = (req, res, next) => {
+  const userId = req.cookies.user_id;
+  const shortURL = req.params.shortURL;
+
+  if (!isUserAuthorized(userId, shortURL)) {
+    return res.status(404).send("404. Page Not Found");
+  }
+  
+  next();
+};
+
 router.use(isUserLoggedIn);
 router.use(filterUrls);
 
@@ -31,11 +48,9 @@ router
     res.render("urls_index");
   })
   .post((req, res) => {
-    const shortURL = generateRandomString();
-    urlDatabase[shortURL] = {
-      longURL: req.body.longURL,
-      userId: req.cookies.user_id
-    };
+    const userId = req.cookies.user_id;
+    const longURL = req.body.longURL;
+    const shortURL = addNewUrlToDb(userId, longURL);
 
     res.redirect(`/urls/${shortURL}`);
   });
@@ -48,9 +63,9 @@ router.get("/new", (req, res) => {
 // Edit URL page
 router
   .route("/:shortURL")
-  .get((req, res) => {
+  .get(blockUnauthorizedUser, (req, res) => {
     const { shortURL } = req.params;
-    const { longURL } = urlDatabase[shortURL];
+    const longURL = findLongUrlByShortUrl(shortURL);
 
     const templateVars = {
       shortURL,
@@ -59,23 +74,17 @@ router
 
     res.render("urls_show", templateVars);
   })
-  .post((req, res) => {
+  .post(blockUnauthorizedUser, (req, res) => {
     const { shortURL } = req.params;
     const { longURL } = req.body;
-    const userId = req.cookies.user_id;
-
-    urlDatabase[shortURL] = {
-      longURL,
-      userId
-    };
+    modifyLongUrl(shortURL, longURL);
 
     res.redirect("/urls");
   });
 
 // Delete URL
-router.post("/:shortURL/delete", (req, res) => {
+router.post("/:shortURL/delete", blockUnauthorizedUser, (req, res) => {
   const { shortURL } = req.params;
-  
   delete urlDatabase[shortURL];
 
   res.redirect("/urls");
