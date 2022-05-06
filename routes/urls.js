@@ -1,13 +1,12 @@
 const express = require("express");
-
 const {
   findUrlsByUserId,
   findLongUrlByShortUrl,
   addNewUrlToDb,
   modifyLongUrl,
-  isUserAuthorized
+  isUserAuthorized,
+  deleteUrl
 } = require("../utils/utils");
-const { urlDatabase } = require("../utils/constants");
 
 const router = express.Router();
 
@@ -84,8 +83,7 @@ router
 
 // Delete URL
 router.post("/:shortURL/delete", blockUnauthorizedUser, (req, res) => {
-  const { shortURL } = req.params;
-  delete urlDatabase[shortURL];
+  deleteUrl(req.params.shortURL);
 
   res.redirect("/urls");
 });
