@@ -13,6 +13,13 @@
   <%- include("partials/_header") %>
 
   <main style="margin: 1em;">
+
+    <% if (locals.message) { %>
+      <div class="alert alert-success" role="alert">
+        <%= locals.message %> 
+      </div>
+    <% } %>
+
     <div style="margin-top: 2em; margin-bottom: 1em;">
       <h3>Log in and start sharing</h3>
     </div>

@@ -14,7 +14,7 @@ const blockVisitor = ((req, res, next) => {
   if (!req.cookies.user_id) {
     return res
       .status(400)
-      .render("login");
+      .render("login", { message: "Please log in first" });
   }
 
   next();
