@@ -9,7 +9,7 @@ const loginRoutes = require("./routes/login");
 const logoutRoutes = require("./routes/logout");
 const redirectRoutes = require("./routes/redirect");
 
-const { findUserById } = require("./utils/utils");
+const { getUser } = require("./middlewares/global");
 
 const app = express();
 const PORT = 8080;
@@ -18,11 +18,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  const user = findUserById(req.cookies.user_id);
-  res.locals.user = user;
-  next();
-});
+app.use(getUser);
 
 app.use("/", indexRoutes);
 app.use("/urls", urlsRoutes);
