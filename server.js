@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+const cookieSession = require("cookie-session");
 
 const indexRoutes = require("./routes/index");
 const urlsRoutes = require("./routes/urls");
@@ -16,7 +16,10 @@ const PORT = 8080;
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieSession({
+  name: "session",
+  keys: ["key1", "key2"],
+}));
 
 app.use(getUser);
 

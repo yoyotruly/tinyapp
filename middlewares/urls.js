@@ -4,7 +4,7 @@ const { findUrlsByUserId, isUserAuthorized } = require("../utils/utils");
  * Block vistor and prompt user to log in.
  */
 const requireLogin = ((req, res, next) => {
-  if (!req.cookies.user_id) {
+  if (!req.session.user_id) {
     return res
       .status(400)
       .render("login", { message: "Please log in first" });
@@ -18,7 +18,7 @@ const requireLogin = ((req, res, next) => {
  * content object.
  */
 const filterUserUrls = ((req, res, next) => {
-  const urls = findUrlsByUserId(req.cookies.user_id);
+  const urls = findUrlsByUserId(req.session.user_id);
   res.locals.urls = urls;
 
   next();
@@ -28,7 +28,7 @@ const filterUserUrls = ((req, res, next) => {
  * Block unauthorized user to perform certain actions.
  */
 const blockUnauthorizedUser = (req, res, next) => {
-  const userId = req.cookies.user_id;
+  const userId = req.session.user_id;
   const shortURL = req.params.shortURL;
 
   if (!isUserAuthorized(userId, shortURL)) {

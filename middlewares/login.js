@@ -13,7 +13,7 @@ const authenticateLogin = (req, res, next) => {
       .render("login", { message: "Invalid email or password" });
   }
   
-  req.userId = user.id;
+  req.session.user_id = user.id;
   next();
 };
 

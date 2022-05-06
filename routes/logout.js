@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/", (req, res) => {
-  res
-    .clearCookie("user_id")
-    .redirect("back");
+  req.session = null;
+  res.redirect("back");
 });
 
 module.exports = router;

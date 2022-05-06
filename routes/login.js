@@ -10,9 +10,7 @@ router
     res.render("login");
   })
   .post(authenticateLogin, (req, res) => {
-    res
-      .cookie("user_id", req.userId)
-      .redirect("/urls");
+    res.redirect("/urls");
   });
 
 module.exports = router;

@@ -14,10 +14,9 @@ router
   .post(validateRegistration, (req, res) => {
     const { email, password } = req.body;
     const userId = addNewUserToDb(email, password);
-  
-    res
-      .cookie("user_id", userId)
-      .redirect("/urls");
+    
+    req.session.user_id = userId;
+    res.redirect("/urls");
   });
 
 module.exports = router;

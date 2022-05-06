@@ -16,7 +16,7 @@ router
     res.render("urls/index");
   })
   .post((req, res) => {
-    const userId = req.cookies.user_id;
+    const userId = req.session.user_id;
     const longURL = req.body.longURL;
     const shortURL = addNewUrlToDb(userId, longURL);
 
