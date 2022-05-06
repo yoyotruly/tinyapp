@@ -1,29 +1,34 @@
 const express = require("express");
 
-const { generateRandomString } = require("../utils/utils");
+const { generateRandomString, findUrlsByUserId } = require("../utils/utils");
 const { urlDatabase } = require("../utils/constants");
 
 const router = express.Router();
 
 const isUserLoggedIn = ((req, res, next) => {
-  if (!req.cookies.user_id) {
+  const userId = req.cookies.user_id;
+  if (!userId) {
     return res
       .status(400)
       .render("login");
   }
+
+  next();
+});
+
+const filterUrls = ((req, res, next) => {
+  const urls = findUrlsByUserId(req.cookies.user_id);
+  res.locals.urls = urls;
   next();
 });
 
 router.use(isUserLoggedIn);
+router.use(filterUrls);
 
 router
   .route("/")
   .get((req, res) => {
-    const templateVars = {
-      urls: urlDatabase
-    };
-
-    res.render("urls_index", templateVars);
+    res.render("urls_index");
   })
   .post((req, res) => {
     const shortURL = generateRandomString();
