@@ -56,9 +56,8 @@ const findUserByLogin = (email, password) => {
  * Check if a user is valid with provided user id, return the user object if it
  * is valid.
  * @param {string} id User ID
- * @returns {?Object} Returns user object if id matches records, returns undefined if
- * id doesn't exist or doesn't match records
- * undefine
+ * @returns {?Object} Returns user object if id matches records, returns undefined
+ * if id doesn't exist or doesn't match records
  */
 const findUserById = (id) => {
   return id && users[id];
