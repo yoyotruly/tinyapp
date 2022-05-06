@@ -124,6 +124,24 @@ const deleteUrl = (shortURL) => {
   delete urlDatabase[shortURL];
 };
 
+/**
+ * Add new user to database and returns user ID.
+ * @param {string} email Email user provided during registration
+ * @param {string} password Password user provided during registration
+ * @returns {string} Returns user ID
+ */
+const addNewUserToDb = (email, password) => {
+  const id = `u${Object.keys(users).length + 1}`;
+  
+  users[id] = {
+    id,
+    email,
+    password
+  };
+
+  return id;
+};
+
 module.exports = {
   generateRandomString,
   isExistingEmail,
@@ -134,5 +152,6 @@ module.exports = {
   findUrlsByUserId,
   addNewUrlToDb,
   modifyLongUrl,
-  deleteUrl
+  deleteUrl,
+  addNewUserToDb
 };
