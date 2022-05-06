@@ -13,6 +13,13 @@
   <%- include("partials/_header") %>
 
   <main style="margin: 1em;">
+
+    <% if (locals.message) { %>
+      <div class="alert alert-success" role="alertdialog">
+        <%= locals.message %> 
+      </div>
+    <% } %>
+
     <div style="margin-top: 2em; margin-bottom: 1em;">
       <h3>Sign up and start shortening</h3>
     </div>
