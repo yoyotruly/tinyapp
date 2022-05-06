@@ -14,7 +14,7 @@ const validateRegistration = (req, res, next) => {
       });
   }
 
-  if (isExistingEmail) {
+  if (isExistingEmail(email)) {
     return res
       .status(400)
       .render("register", {
