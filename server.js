@@ -7,8 +7,9 @@ const urlsRoutes = require("./routes/urls");
 const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
 const logoutRoutes = require("./routes/logout");
+const redirectRoutes = require("./routes/redirect");
 
-const { findUserById, findLongUrlByShortUrl } = require("./utils/utils");
+const { findUserById } = require("./utils/utils");
 
 const app = express();
 const PORT = 8080;
@@ -28,15 +29,7 @@ app.use("/urls", urlsRoutes);
 app.use("/register", registerRoutes);
 app.use("/login", loginRoutes);
 app.use("/logout", logoutRoutes);
-
-// Redirect to original link
-app.get("/u/:shortURL", (req, res) => {
-  const longURL = findLongUrlByShortUrl(req.params.shortURL);
-  
-  if (!longURL) return res.status(404).render("404");
-
-  res.redirect(longURL);
-});
+app.use("/u", redirectRoutes);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);
