@@ -6,8 +6,7 @@ const { urlDatabase } = require("../utils/constants");
 const router = express.Router();
 
 const isUserLoggedIn = ((req, res, next) => {
-  const userId = req.cookies.user_id;
-  if (!userId) {
+  if (!req.cookies.user_id) {
     return res
       .status(400)
       .render("login");
@@ -19,6 +18,7 @@ const isUserLoggedIn = ((req, res, next) => {
 const filterUrls = ((req, res, next) => {
   const urls = findUrlsByUserId(req.cookies.user_id);
   res.locals.urls = urls;
+  
   next();
 });
 
