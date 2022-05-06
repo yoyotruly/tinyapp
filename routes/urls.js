@@ -1,6 +1,6 @@
 const express = require("express");
 const { requireLogin, filterUserUrls, blockUnauthorizedUser } = require("../middlewares/urls");
-const { findLongUrlByShortUrl, addNewUrlToDb, modifyLongUrl, deleteUrl } = require("../utils/utils");
+const { findLongUrlByShortUrl, addNewUrlToDb, updateLongUrl, deleteUrl } = require("../utils/utils");
 
 const router = express.Router();
 
@@ -41,7 +41,7 @@ router
     const { shortURL } = req.params;
     const { longURL } = req.body;
     
-    modifyLongUrl(shortURL, longURL);
+    updateLongUrl(shortURL, longURL);
 
     res.redirect("/urls");
   });

@@ -112,7 +112,7 @@ const addNewUrlToDb = (userId, longURL) => {
  * @param {string} updatedLongURL New long URL user provided
  * @returns None
  */
-const modifyLongUrl = (shortURL, updatedLongURL) => {
+const updateLongUrl = (shortURL, updatedLongURL) => {
   urlDatabase[shortURL].longURL = updatedLongURL;
 };
 
@@ -151,7 +151,7 @@ module.exports = {
   findLongUrlByShortUrl,
   findUrlsByUserId,
   addNewUrlToDb,
-  modifyLongUrl,
+  updateLongUrl,
   deleteUrl,
   addNewUserToDb
 };
