@@ -3,6 +3,7 @@ const { findUserByLogin } = require("../utils/utils");
 
 const router = express.Router();
 
+/* ------ Log In Page ------ */
 router
   .route("/")
   .get((req, res) => {

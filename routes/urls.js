@@ -43,6 +43,7 @@ router.use(filterUrls);
 
 router.param("shortURL", blockUnauthorizedUser);
 
+/* ------ My URLs Page ------ */
 router
   .route("/")
   .get((req, res) => {
@@ -56,12 +57,12 @@ router
     res.redirect(`/urls/${shortURL}`);
   });
 
-// Create New URL page
+/* ------ Create New URL Page ------ */
 router.get("/new", (req, res) => {
   res.render("urls_new");
 });
 
-// Edit URL page
+/* ------ Edit URL ------ */
 router
   .route("/:shortURL")
   .get((req, res) => {
@@ -83,7 +84,7 @@ router
     res.redirect("/urls");
   });
 
-// Delete URL
+/* ------ Delete URL ------ */
 router.post("/:shortURL/delete", (req, res) => {
   deleteUrl(req.params.shortURL);
 

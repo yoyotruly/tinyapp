@@ -5,6 +5,7 @@ const { users } = require("../utils/constants");
 
 const router = express.Router();
 
+/* ------ Sign Up Page ------ */
 router
   .route("/")
   .get((req, res) => {
