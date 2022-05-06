@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 app.use((req, res, next) => {
   const user = findUserById(req.cookies.user_id);
-  res.locals = { user };
+  res.locals.user = user;
   next();
 });
 
