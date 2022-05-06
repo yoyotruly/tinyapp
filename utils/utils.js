@@ -97,6 +97,14 @@ const modifyLongUrl = (shortURL, updatedLongURL) => {
   urlDatabase[shortURL].longURL = updatedLongURL;
 };
 
+/** Delete URL record.
+ * @param {string} shortURL Short URL
+ * @returns None
+ */
+const deleteUrl = (shortURL) => {
+  delete urlDatabase[shortURL];
+};
+
 /**
  * Check if a user is authorized to check or perform actions on certain urls.
  * @param {string} userId The ID user logged in as
@@ -125,5 +133,6 @@ module.exports = {
   findUrlsByUserId,
   addNewUrlToDb,
   modifyLongUrl,
-  isUserAuthorized
+  isUserAuthorized,
+  deleteUrl
 };
