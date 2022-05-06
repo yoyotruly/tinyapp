@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const { users, urlDatabase } = require("./constants");
 
 /**
@@ -130,8 +131,6 @@ const deleteUrl = (shortURL) => {
  * @returns {string} Returns hashed password
  */
 const _hashPassword = (password) => {
-  const bcrypt = require('bcryptjs');
-
   return bcrypt.hashSync(password, 10);
 };
 
