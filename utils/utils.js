@@ -1,7 +1,11 @@
 const { users, urlDatabase } = require("./constants");
 
+/**
+ * Generate a string of random letter and number combination.
+ * @returns {string} 6 charactor random string
+ */
 const generateRandomString = () => {
-  return "x2Az3";
+  return Math.random().toString(36).slice(2, 8);
 };
 
 /**
@@ -103,10 +107,10 @@ const modifyLongUrl = (shortURL, updatedLongURL) => {
  */
 const isUserAuthorized = (userId, value, lookupBy = "shortURL") => {
   let recordUserId;
-
+  
   switch (lookupBy) {
   case "shortURL":
-    recordUserId = urlDatabase[value].userId;
+    recordUserId = urlDatabase[value] && urlDatabase[value].userId;
   }
 
   return userId === recordUserId;
