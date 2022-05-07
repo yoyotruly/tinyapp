@@ -1,4 +1,4 @@
-const { findUrlsByUserId, isUserAuthorized } = require("../utils/utils");
+const { getUrlsByUserId, isUserAuthorized } = require("../utils/utils");
 
 /**
  * Block vistor and prompt user to log in.
@@ -18,7 +18,7 @@ const requireLogin = ((req, res, next) => {
  * content object.
  */
 const filterUserUrls = ((req, res, next) => {
-  const urls = findUrlsByUserId(req.session.user_id);
+  const urls = getUrlsByUserId(req.session.user_id);
   res.locals.urls = urls;
 
   next();

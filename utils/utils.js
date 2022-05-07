@@ -5,7 +5,7 @@ const { users, urlDatabase } = require("./constants");
  * Generate a string of random letter and number combination.
  * @returns {string} 6 charactor random string
  */
-const generateRandomString = () => {
+const getRandomString = () => {
   return Math.random().toString(36).slice(2, 8);
 };
 
@@ -38,16 +38,16 @@ const isUserAuthorized = (userId, value, lookupBy = "shortURL") => {
 };
 
 /**
- * Find user info by email and password.
+ * Get user's info by email and password.
  * @param {string} email Email
  * @param {string} password Password
  * @returns {?Object} Returns user object if email and password match user's
  * record, otherwise returns false
  */
-const findUserByLogin = (email, password) => {
+const getUserByLogin = (email, password) => {
   if (!email || !password) return false;
 
-  const user = Object.values(users).find((user) => {
+  const user = Object.values(users).get((user) => {
     return user.email === email && bcrypt.compareSync(password, user.password);
   });
 
@@ -63,17 +63,17 @@ const findUserByLogin = (email, password) => {
  * @returns {?Object} Returns user object if id matches records, returns undefined
  * if id doesn't exist or doesn't match records
  */
-const findUserById = (id) => {
+const getUserById = (id) => {
   return id && users[id];
 };
 
 /**
- * Find original long URL by shortened URL.
+ * get original long URL by shortened URL.
  * @param {string} shortURL Shortened URL
  * @returns {?string} Returns original long URL if shortURL matches records,
  * returns undefined otherwise
  */
-const findLongUrlByShortUrl = (shortURL) => {
+const getLongUrlByShortUrl = (shortURL) => {
   return urlDatabase[shortURL] && urlDatabase[shortURL].longURL;
 };
 
@@ -86,7 +86,7 @@ const findLongUrlByShortUrl = (shortURL) => {
  *   { shortURL: 'c3d4', longURL: 'https://www.youtube.com/' },
  * ]
  */
-const findUrlsByUserId = (userId) => {
+const getUrlsByUserId = (userId) => {
   return Object.entries(urlDatabase)
     .filter(url => url[1].userId === userId)
     .map(url => ({
@@ -101,7 +101,7 @@ const findUrlsByUserId = (userId) => {
  * @returns {string} Returns the short URL system assigned to the original URL
  */
 const addNewUrlToDb = (userId, longURL) => {
-  const shortURL = generateRandomString();
+  const shortURL = getRandomString();
   urlDatabase[shortURL] = {
     longURL,
     userId
@@ -157,13 +157,13 @@ const addNewUserToDb = (email, password) => {
 };
 
 module.exports = {
-  generateRandomString,
+  getRandomString,
   isExistingEmail,
   isUserAuthorized,
-  findUserByLogin,
-  findUserById,
-  findLongUrlByShortUrl,
-  findUrlsByUserId,
+  getUserByLogin,
+  getUserById,
+  getLongUrlByShortUrl,
+  getUrlsByUserId,
   addNewUrlToDb,
   updateLongUrl,
   deleteUrl,

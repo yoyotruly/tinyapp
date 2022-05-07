@@ -1,11 +1,11 @@
-const { findUserByLogin } = require("../utils/utils");
+const { getUserByLogin } = require("../utils/utils");
 
 /**
  * Authenticate if a user's login information is valid.
  */
 const authenticateLogin = (req, res, next) => {
   const { email, password } = req.body;
-  const user = findUserByLogin(email, password);
+  const user = getUserByLogin(email, password);
 
   if (!user) {
     return res

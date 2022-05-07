@@ -1,11 +1,11 @@
 const express = require("express");
-const { findLongUrlByShortUrl } = require("../utils/utils");
+const { getLongUrlByShortUrl } = require("../utils/utils");
 
 const router = express.Router();
 
 // Redirect to original link
 router.get("/:shortURL", (req, res) => {
-  const longURL = findLongUrlByShortUrl(req.params.shortURL);
+  const longURL = getLongUrlByShortUrl(req.params.shortURL);
   
   if (!longURL) return res.status(404).render("404");
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const { requireLogin, filterUserUrls, blockUnauthorizedUser } = require("../middlewares/urls");
-const { findLongUrlByShortUrl, addNewUrlToDb, updateLongUrl, deleteUrl } = require("../utils/utils");
+const { getLongUrlByShortUrl, addNewUrlToDb, updateLongUrl, deleteUrl } = require("../utils/utils");
 
 const router = express.Router();
 
@@ -33,7 +33,7 @@ router
   .route("/:shortURL")
   .get((req, res) => {
     const { shortURL } = req.params;
-    const longURL = findLongUrlByShortUrl(shortURL);
+    const longURL = getLongUrlByShortUrl(shortURL);
 
     res.render("urls/show", { shortURL, longURL });
   })
