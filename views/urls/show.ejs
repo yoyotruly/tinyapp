@@ -17,9 +17,13 @@
         Your new TinyURL: <a href="/u/<%= shortURL %>" target="_blank">/u/<%= shortURL %></a>
       </h5>
       <p class="card-text text-secondary">
-        <img src="https://www.google.com/s2/favicons?sz=64&domain_url=<%= longURL %>" loading="lazy" class="url-logo" style="height: 24px; width: 24px; min-width: 24px; margin-left: 0.3em; margin-right: 0.3em;">
-        <%= longURL %>
+        <img src="https://www.google.com/s2/favicons?sz=64&domain_url=<%= url.longURL %>" loading="lazy" class="url-logo" style="height: 24px; width: 24px; min-width: 24px; margin-left: 0.3em; margin-right: 0.3em;">
+        <%= url.longURL %>
       <p>
+      <p class="text-muted" style="font-size: smaller">
+        <span style="margin-right: 1em"><%= url.analytics.totalClicks %> TOTAL CLICKS 🔗</span>
+        <span><%= url.analytics.uniqueVistors %> UNIQUE VISITORS 👯</span>
+      </p>
 
     </div>
     <div class="card-footer text-muted">
