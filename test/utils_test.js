@@ -58,7 +58,20 @@ describe("getRandomString()", () => {
 
 /* ------ isExstingEmail Tests ------ */
 describe("isExistingEmail(email, userDb)", () => {
-  // utils.isExistingEmail();
+  it("should return true when passed an email already exists in database", () => {
+    const result = utils.isExistingEmail("user@example.com");
+    expect(result).to.be.true;
+  });
+
+  it("should return false when passed an email that doesn't exist", () => {
+    const result = utils.isExistingEmail("fake@example.com");
+    expect(result).to.be.false;
+  });
+
+  it("should return false when passed an empty email", () => {
+    const result = utils.isExistingEmail("");
+    expect(result).to.be.false;
+  });
 });
 
 describe("isUserAuthorized(userId, value, lookupBy, userDb)", () => {
