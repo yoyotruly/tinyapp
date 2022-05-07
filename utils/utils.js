@@ -173,6 +173,15 @@ const addNewUserToDb = (email, password, userDb = users) => {
   return id;
 };
 
+/**
+ * Increment the total click of a given short URL by one.
+ * @param {string} shortURL Short URL
+ * @param {Object} [urlDb=urlDatabase] Database object containing all url info
+ */
+const incrementUrlTotalClicks = (shortURL, urlDb = urlDatabase) => {
+  urlDb[shortURL].analytics.totalClicks += 1;
+};
+
 module.exports = {
   getRandomString,
   isExistingEmail,
@@ -184,5 +193,6 @@ module.exports = {
   addNewUrlToDb,
   updateLongUrl,
   deleteUrl,
-  addNewUserToDb
+  addNewUserToDb,
+  incrementUrlTotalClicks
 };
