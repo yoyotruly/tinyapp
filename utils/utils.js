@@ -47,7 +47,7 @@ const isUserAuthorized = (userId, value, lookupBy = "shortURL") => {
 const getUserByLogin = (email, password) => {
   if (!email || !password) return false;
 
-  const user = Object.values(users).get((user) => {
+  const user = Object.values(users).find((user) => {
     return user.email === email && bcrypt.compareSync(password, user.password);
   });
 
