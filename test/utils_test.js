@@ -1,46 +1,59 @@
 const utils = require("../utils/utils");
 
+const testUsers = {
+  "userRandomID": {
+    id: "userRandomID",
+    email: "user@example.com",
+    password: "purple-monkey-dinosaur"
+  },
+  "user2RandomID": {
+    id: "user2RandomID",
+    email: "user2@example.com",
+    password: "dishwasher-funk"
+  }
+};
+
 describe("getRandomString()", () => {
-  utils.getRandomString();
+  // utils.getRandomString();
 });
 
 describe("isExistingEmail(email, userDb)", () => {
-  utils.isExistingEmail();
+  // utils.isExistingEmail();
 });
 
 describe("isUserAuthorized(userId, value, lookupBy, userDb)", () => {
-  utils.isUserAuthorized();
+  // utils.isUserAuthorized();
 });
 
 describe("getUserByLogin(email, password, userDb)", () => {
-  utils.getUserByLogin();
+  // utils.getUserByLogin();
 });
 
 describe("getUserById(id, userDb)", () => {
-  utils.getUserById();
+  // utils.getUserById();
 });
 
 describe("getLongUrlByShortUrl(shortURL, urlDb)", () => {
-  utils.getLongUrlByShortUrl();
+  // utils.getLongUrlByShortUrl();
 });
 
 describe("getUrlsByUserId(userId, urlDb)", () => {
-  utils.getUrlsByUserId();
+  // utils.getUrlsByUserId();
 });
 
 describe("addNewUrlToDb(userId, longURL, urlDb)", () => {
-  utils.addNewUrlToDb();
+  // utils.addNewUrlToDb();
 
 });
 
 describe("updateLongUrl(shortURL, updatedLongURL, urlDb)", () => {
-  utils.updateLongUrl();
+  // utils.updateLongUrl();
 });
 
 describe("deleteUrl(shortURL, urlDb)", () => {
-  utils.deleteUrl();
+  // utils.deleteUrl();
 });
 
 describe("addNewUserToDb(email, password, userDb)", () => {
-  utils.addNewUserToDb();
+  // utils.addNewUserToDb();
 });
