@@ -13,7 +13,7 @@
     </div>
     <div>
       <% if (user) { %>
-        <form action="/logout" method="post">
+        <form action="/logout" method="POST">
           <span class="mr-2 text-white">Welcome back, <%= user.email %></span>
           <button class="btn btn-outline-secondary">Logout</button>
         </form>
