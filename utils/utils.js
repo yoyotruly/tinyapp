@@ -68,7 +68,9 @@ const getUserByLogin = (email, password, userDb = users) => {
  * if id doesn't exist or doesn't match records
  */
 const getUserById = (id, userDb = users) => {
-  return id && userDb[id];
+  if (!id) return undefined;
+  
+  return userDb[id];
 };
 
 /**
