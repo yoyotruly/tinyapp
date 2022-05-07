@@ -28,7 +28,7 @@ router.get("/new", (req, res) => {
   res.render("urls/new");
 });
 
-/* ------ Edit URL ------ */
+/* ------ Edit/Delete URL ------ */
 router
   .route("/:shortURL")
   .get((req, res) => {
@@ -44,13 +44,11 @@ router
     updateLongUrl(shortURL, longURL);
 
     res.redirect("/urls");
+  })
+  .delete((req, res) => {
+    deleteUrl(req.params.shortURL);
+
+    res.redirect("/urls");
   });
-
-/* ------ Delete URL ------ */
-router.post("/:shortURL/delete", (req, res) => {
-  deleteUrl(req.params.shortURL);
-
-  res.redirect("/urls");
-});
 
 module.exports = router;
