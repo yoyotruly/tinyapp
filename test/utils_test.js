@@ -235,8 +235,13 @@ describe("getUrlsByUserId(userId, urlDb)", () => {
 
 /* ------ addNewUrlToDb Tests ------ */
 describe("addNewUrlToDb(userId, longURL, urlDb)", () => {
-  // utils.addNewUrlToDb();
+  it("should add new url to database", () => {
+    const longURL = "https://www.google.com";
+    const shortURL = utils.addNewUrlToDb("testId", longURL, testUrls);
 
+    expect(shortURL).to.be.a("string");
+    expect(testUrls[shortURL].longURL).to.equal(longURL);
+  });
 });
 
 /* ------ updateLongUrl Tests ------ */
