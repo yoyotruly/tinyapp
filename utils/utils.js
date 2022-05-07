@@ -48,18 +48,15 @@ const isUserAuthorized = (userId, value, lookupBy = "shortURL", urlDb = urlDatab
  * @param {string} password Password
  * @param {Object} [userDb=users] Database object storing all user info
  * @returns {?Object} Returns user object if email and password match user's
- * record, otherwise returns false
+ * record, otherwise returns undefined
  */
 const getUserByLogin = (email, password, userDb = users) => {
-  if (!email || !password) return false;
+  if (!email || !password) return undefined;
 
-  const user = Object.values(userDb).find((user) => {
-    return user.email === email && bcrypt.compareSync(password, user.password);
-  });
-
-  if (!user) return false;
-
-  return user;
+  return Object.values(userDb)
+    .find((user) => {
+      return user.email === email && bcrypt.compareSync(password, user.password);
+    });
 };
 
 /**
