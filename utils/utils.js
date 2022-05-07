@@ -12,10 +12,13 @@ const getRandomString = () => {
 /**
  * Check if the input email has already been registered.
  * @param {string} email Email
+ * @param {Object} [userDb=users] Database object storing all user info
  * @returns {boolean} Returns true if email already exists, otherwise returns false
  */
-const isExistingEmail = (email) => {
-  return Object.values(users).map(user => user.email).includes(email);
+const isExistingEmail = (email, userDb = users) => {
+  return Object.values(userDb)
+    .map(user => user.email)
+    .includes(email);
 };
 
 /**
@@ -23,15 +26,17 @@ const isExistingEmail = (email) => {
  * @param {string} userId The ID user logged in as
  * @param {string} value The value to look up
  * @param {string} [lookupBy=shortURL] Which property to look up by
+ * @param {Object} [urlDb=urlDatabase] Database object storing all URL related info
  * @returns {Boolean} Returns true if current user matches record, returns false
  * otherwise
  */
-const isUserAuthorized = (userId, value, lookupBy = "shortURL") => {
+const isUserAuthorized = (userId, value, lookupBy = "shortURL", urlDb = urlDatabase) => {
   let recordUserId;
   
+  // Using switch to account for future scenarios when lookup key is not only shortURL
   switch (lookupBy) {
   case "shortURL":
-    recordUserId = urlDatabase[value] && urlDatabase[value].userId;
+    recordUserId = urlDb[value] && urlDb[value].userId;
   }
 
   return userId === recordUserId;
@@ -41,13 +46,14 @@ const isUserAuthorized = (userId, value, lookupBy = "shortURL") => {
  * Get user's info by email and password.
  * @param {string} email Email
  * @param {string} password Password
+ * @param {Object} [userDb=users] Database object storing all user info
  * @returns {?Object} Returns user object if email and password match user's
  * record, otherwise returns false
  */
-const getUserByLogin = (email, password) => {
+const getUserByLogin = (email, password, userDb = users) => {
   if (!email || !password) return false;
 
-  const user = Object.values(users).find((user) => {
+  const user = Object.values(userDb).find((user) => {
     return user.email === email && bcrypt.compareSync(password, user.password);
   });
 
@@ -60,34 +66,37 @@ const getUserByLogin = (email, password) => {
  * Check if a user is valid with provided user id, return the user object if it
  * is valid.
  * @param {string} id User ID
+ * @param {Object} [userDb=users] Database object storing all user info
  * @returns {?Object} Returns user object if id matches records, returns undefined
  * if id doesn't exist or doesn't match records
  */
-const getUserById = (id) => {
-  return id && users[id];
+const getUserById = (id, userDb = users) => {
+  return id && userDb[id];
 };
 
 /**
  * get original long URL by shortened URL.
  * @param {string} shortURL Shortened URL
+ * @param {Object} [urlDb=urlDatabase] Database object storing all url info
  * @returns {?string} Returns original long URL if shortURL matches records,
  * returns undefined otherwise
  */
-const getLongUrlByShortUrl = (shortURL) => {
-  return urlDatabase[shortURL] && urlDatabase[shortURL].longURL;
+const getLongUrlByShortUrl = (shortURL, urlDb = urlDatabase) => {
+  return urlDb[shortURL] && urlDb[shortURL].longURL;
 };
 
 /**
  * Filter url database and return only urls created by userId.
  * @param {string} userId User Id
+ * @param {Object} [urlDb=urlDatabase] Database object storing all url info
  * @returns {Array} Returns an array or urls object, e.g.
  * [
  *   { shortURL: 'a1b2', longURL: 'https://www.google.com' },
  *   { shortURL: 'c3d4', longURL: 'https://www.youtube.com/' },
  * ]
  */
-const getUrlsByUserId = (userId) => {
-  return Object.entries(urlDatabase)
+const getUrlsByUserId = (userId, urlDb = urlDatabase) => {
+  return Object.entries(urlDb)
     .filter(url => url[1].userId === userId)
     .map(url => ({
       "shortURL": url[0],
@@ -98,11 +107,12 @@ const getUrlsByUserId = (userId) => {
 /** Add new url record to database.
  * @param {string} userId Current user's ID
  * @param {string} longURL Original URL
+ * @param {Object} [urlDb=urlDatabase] Database object containing all url info
  * @returns {string} Returns the short URL system assigned to the original URL
  */
-const addNewUrlToDb = (userId, longURL) => {
+const addNewUrlToDb = (userId, longURL, urlDb = urlDatabase) => {
   const shortURL = getRandomString();
-  urlDatabase[shortURL] = {
+  urlDb[shortURL] = {
     longURL,
     userId
   };
@@ -114,18 +124,20 @@ const addNewUrlToDb = (userId, longURL) => {
  * Modify original URL in database.
  * @param {string} shortURL Short URL for this record
  * @param {string} updatedLongURL New long URL user provided
+ * @param {Object} [urlDb=urlDatabase] Database object storing all url info
  * @returns None
  */
-const updateLongUrl = (shortURL, updatedLongURL) => {
-  urlDatabase[shortURL].longURL = updatedLongURL;
+const updateLongUrl = (shortURL, updatedLongURL, urlDb = urlDatabase) => {
+  urlDb[shortURL].longURL = updatedLongURL;
 };
 
 /** Delete URL record.
  * @param {string} shortURL Short URL
+ * @param {Object} [urlDb=urlDatabase] Database object storing all url info
  * @returns None
  */
-const deleteUrl = (shortURL) => {
-  delete urlDatabase[shortURL];
+const deleteUrl = (shortURL, urlDb = urlDatabase) => {
+  delete urlDb[shortURL];
 };
 
 /**
@@ -141,13 +153,14 @@ const _hashPassword = (password) => {
  * Add new user to database and returns user ID.
  * @param {string} email Email user provided during registration
  * @param {string} password Password user provided during registration
+ * @param {Object} [userDb=users] Database object storing all user info
  * @returns {string} Returns user ID
  */
-const addNewUserToDb = (email, password) => {
-  const id = `u${Object.keys(users).length + 1}`;
+const addNewUserToDb = (email, password, userDb = users) => {
+  const id = `u${Object.keys(userDb).length + 1}`;
   const hashedPassword = _hashPassword(password);
   
-  users[id] = {
+  userDb[id] = {
     id,
     email,
     hashedPassword
