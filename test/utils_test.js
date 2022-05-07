@@ -77,7 +77,30 @@ describe("getUserByLogin(email, password, userDb)", () => {
 });
 
 describe("getUserById(id, userDb)", () => {
-  // utils.getUserById();
+  it("should return a user object with a valid id", () => {
+    const user = utils.getUserById("userRandomID", testUsers);
+    const expectedOutput = testUsers.userRandomID;
+
+    expect(user).to.eql(expectedOutput);
+  });
+
+  it("should return undefined with an invalid id", () => {
+    const user = utils.getUserById("fakeID", testUsers);
+
+    expect(user).to.equal(undefined);
+  });
+
+  it("should return undefined with an id of undefined", () => {
+    const user = utils.getUserById(undefined, testUsers);
+
+    expect(user).to.equal(undefined);
+  });
+
+  it("should return undefined with an id of empty string", () => {
+    const user = utils.getUserById("", testUsers);
+
+    expect(user).to.equal(undefined);
+  });
 });
 
 describe("getUrlByShortUrl(shortURL, urlDb)", () => {
