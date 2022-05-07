@@ -33,8 +33,8 @@ describe("getUserById(id, userDb)", () => {
   // utils.getUserById();
 });
 
-describe("getLongUrlByShortUrl(shortURL, urlDb)", () => {
-  // utils.getLongUrlByShortUrl();
+describe("getUrlByShortUrl(shortURL, urlDb)", () => {
+  // utils.getUrlByShortUrl();
 });
 
 describe("getUrlsByUserId(userId, urlDb)", () => {
