@@ -33,9 +33,10 @@ router
   .route("/:shortURL")
   .get((req, res) => {
     const { shortURL } = req.params;
-    const longURL = getUrlByShortUrl(shortURL).longURL;
+    const url = getUrlByShortUrl(shortURL);
+    console.log(url);
 
-    res.render("urls/show", { shortURL, longURL });
+    res.render("urls/show", { shortURL, url });
   })
   .put((req, res) => {
     const { shortURL } = req.params;
