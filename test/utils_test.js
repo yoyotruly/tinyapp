@@ -43,7 +43,17 @@ const testUrls = {
 
 /* ------ getRandomString Tests ------ */
 describe("getRandomString()", () => {
-  // utils.getRandomString();
+  it("should return a string with a length of 6", () => {
+    const randomString = utils.getRandomString();
+    expect(randomString).to.be.a("string");
+    expect(randomString.length).to.equal(6);
+  });
+
+  it("should generate two different strings by calling twice", () => {
+    const randomString1 = utils.getRandomString();
+    const randomString2 = utils.getRandomString();
+    expect(randomString1).to.not.equal(randomString2);
+  });
 });
 
 /* ------ isExstingEmail Tests ------ */
@@ -52,7 +62,10 @@ describe("isExistingEmail(email, userDb)", () => {
 });
 
 describe("isUserAuthorized(userId, value, lookupBy, userDb)", () => {
-  // utils.isUserAuthorized;
+  // const userId = 
+  // const lookupBy = "shortURL"
+  // const userDb = testUsers
+  // utils.isUserAuthorized()
 });
 
 /* ------ getUserByLogin Tests ------ */
