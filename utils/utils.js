@@ -114,7 +114,11 @@ const addNewUrlToDb = (userId, longURL, urlDb = urlDatabase) => {
   const shortURL = getRandomString();
   urlDb[shortURL] = {
     longURL,
-    userId
+    userId,
+    analytics: {
+      totalClicks: 0,
+      uniqueVistors: 0
+    }
   };
 
   return shortURL;
