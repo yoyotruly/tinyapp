@@ -23,6 +23,14 @@ const testUrls = {
       uniqueVistors: 0
     }
   },
+  "ty5W3Q": {
+    longURL: "https://www.google.ca",
+    userId: "userRandomID",
+    analytics: {
+      totalClicks: 0,
+      uniqueVistors: 0
+    }
+  },
   "a1Ea5x": {
     longURL: "https://www.youtube.com/",
     userId: "user2RandomID",
@@ -33,10 +41,12 @@ const testUrls = {
   },
 };
 
+/* ------ getRandomString Tests ------ */
 describe("getRandomString()", () => {
   // utils.getRandomString();
 });
 
+/* ------ isExstingEmail Tests ------ */
 describe("isExistingEmail(email, userDb)", () => {
   // utils.isExistingEmail();
 });
@@ -45,6 +55,7 @@ describe("isUserAuthorized(userId, value, lookupBy, userDb)", () => {
   // utils.isUserAuthorized;
 });
 
+/* ------ getUserByLogin Tests ------ */
 describe("getUserByLogin(email, password, userDb)", () => {
   it("should return a user object with valid email and password", () => {
     const user = utils.getUserByLogin(
@@ -90,6 +101,7 @@ describe("getUserByLogin(email, password, userDb)", () => {
   });
 });
 
+/* ------ getUserById Tests ------ */
 describe("getUserById(id, userDb)", () => {
   it("should return a user object with a valid id", () => {
     const user = utils.getUserById("userRandomID", testUsers);
@@ -113,6 +125,7 @@ describe("getUserById(id, userDb)", () => {
   });
 });
 
+/* ------ getUrlByShortUrl Tests ------ */
 describe("getUrlByShortUrl(shortURL, urlDb)", () => {
   it("should return an URL object with a valid shortURL", () => {
     const url = utils.getUrlByShortUrl("b2xVn2", testUrls);
@@ -122,37 +135,70 @@ describe("getUrlByShortUrl(shortURL, urlDb)", () => {
 
   it("should return undefined with an invalid shortURL", () => {
     const url = utils.getUrlByShortUrl("asdfg", testUrls);
-    expect(url).to.eql(undefined);
+    expect(url).to.equal(undefined);
   });
 
   it("should return undefined with an empty shortURL", () => {
     const url = utils.getUrlByShortUrl("", testUrls);
-    expect(url).to.eql(undefined);
+    expect(url).to.equal(undefined);
   });
 
   it("should return undefined with a shortURL being undefined", () => {
     const url = utils.getUrlByShortUrl(undefined, testUrls);
-    expect(url).to.eql(undefined);
+    expect(url).to.equal(undefined);
   });
 });
 
+/* ------ getUrlsByUserId Tests ------ */
 describe("getUrlsByUserId(userId, urlDb)", () => {
-  // utils.getUrlsByUserId();
+  it("should return an array containing all shortURLs and longURLs associated with a valid userId", () => {
+    const urls = utils.getUrlsByUserId("userRandomID", testUrls);
+    const expectedOutput = [
+      {
+        shortURL: "b2xVn2",
+        longURL: "https://www.lighthouselabs.ca"
+      },
+      {
+        shortURL: "ty5W3Q",
+        longURL: "https://www.google.ca"
+      }
+    ];
+    expect(urls).to.eql(expectedOutput);
+  });
+
+  it("should return an empty array with an invalid userId", () => {
+    const url = utils.getUrlsByUserId("fakeID", testUrls);
+    expect(url).to.eql([]);
+  });
+
+  it("should return an empty array with an empty userId", () => {
+    const url = utils.getUrlsByUserId("", testUrls);
+    expect(url).to.eql([]);
+  });
+
+  it("should return an empty array with userId being undefined", () => {
+    const url = utils.getUrlsByUserId(undefined, testUrls);
+    expect(url).to.eql([]);
+  });
 });
 
+/* ------ addNewUrlToDb Tests ------ */
 describe("addNewUrlToDb(userId, longURL, urlDb)", () => {
   // utils.addNewUrlToDb();
 
 });
 
+/* ------ updateLongUrl Tests ------ */
 describe("updateLongUrl(shortURL, updatedLongURL, urlDb)", () => {
   // utils.updateLongUrl();
 });
 
+/* ------ deleteUrl Tests ------ */
 describe("deleteUrl(shortURL, urlDb)", () => {
   // utils.deleteUrl();
 });
 
+/* ------ addNewUserToDb Tests ------ */
 describe("addNewUserToDb(email, password, userDb)", () => {
   // utils.addNewUserToDb();
 });
