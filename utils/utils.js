@@ -128,10 +128,14 @@ const addNewUrlToDb = (userId, longURL, urlDb = urlDatabase) => {
  * @param {string} shortURL Short URL for this record
  * @param {string} updatedLongURL New long URL user provided
  * @param {Object} [urlDb=urlDatabase] Database object storing all url info
- * @returns None
+ * @returns Returns true if update is successful, returns false if shortURL is
+ * invalid, doesn't exist, or empty
  */
 const updateLongUrl = (shortURL, updatedLongURL, urlDb = urlDatabase) => {
+  if (!urlDb[shortURL]) return false;
+
   urlDb[shortURL].longURL = updatedLongURL;
+  return true;
 };
 
 /** Delete URL record.
