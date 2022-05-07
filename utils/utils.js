@@ -27,7 +27,7 @@ const isExistingEmail = (email, userDb = users) => {
  * @param {string} value The value to look up
  * @param {string} [lookupBy=shortURL] Which property to look up by
  * @param {Object} [urlDb=urlDatabase] Database object storing all URL related info
- * @returns {Boolean} Returns true if current user matches record, returns false
+ * @returns {boolean} Returns true if current user matches record, returns false
  * otherwise
  */
 const isUserAuthorized = (userId, value, lookupBy = "shortURL", urlDb = urlDatabase) => {
