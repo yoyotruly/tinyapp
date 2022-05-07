@@ -270,7 +270,11 @@ describe("updateLongUrl(shortURL, updatedLongURL, urlDb)", () => {
 
 /* ------ deleteUrl Tests ------ */
 describe("deleteUrl(shortURL, urlDb)", () => {
-  // utils.deleteUrl();
+  it("should delete the url when passed a valid short url", () => {
+    const shortURL = "a1Ea5x";
+    utils.deleteUrl(shortURL, testUrls);
+    expect(testUrls[shortURL]).to.equal(undefined);
+  });
 });
 
 /* ------ addNewUserToDb Tests ------ */
