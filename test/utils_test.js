@@ -190,7 +190,26 @@ describe("addNewUrlToDb(userId, longURL, urlDb)", () => {
 
 /* ------ updateLongUrl Tests ------ */
 describe("updateLongUrl(shortURL, updatedLongURL, urlDb)", () => {
-  // utils.updateLongUrl();
+  it("should update corresponding longURL and return true when passed a valid shortURL", () => {
+    const shortURL = "b2xVn2";
+    const updatedLongURL = "https://www.facebook.com";
+    expect(utils.updateLongUrl(shortURL, updatedLongURL, testUrls)).to.be.true;
+    expect(testUrls[shortURL].longURL).to.equal(updatedLongURL);
+  });
+
+  it("should return false when passed an invalid shortURL", () => {
+    const shortURL = "fake123";
+    const updatedLongURL = "https://www.facebook.com";
+    expect(utils.updateLongUrl(shortURL, updatedLongURL, testUrls)).to.be.false;
+    expect(testUrls[shortURL]).to.equal(undefined);
+  });
+
+  it("should return false when passed an empty shortURL", () => {
+    const shortURL = "";
+    const updatedLongURL = "https://www.facebook.com";
+    expect(utils.updateLongUrl(shortURL, updatedLongURL, testUrls)).to.be.false;
+    expect(testUrls[shortURL]).to.equal(undefined);
+  });
 });
 
 /* ------ deleteUrl Tests ------ */
