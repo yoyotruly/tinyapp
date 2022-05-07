@@ -279,5 +279,12 @@ describe("deleteUrl(shortURL, urlDb)", () => {
 
 /* ------ addNewUserToDb Tests ------ */
 describe("addNewUserToDb(email, password, userDb)", () => {
-  // utils.addNewUserToDb();
+  it("should add new user to database when passed valid email and password", () => {
+    const email = "test@test.com";
+    const password = "test";
+    const userId = utils.addNewUserToDb(email, password, testUsers);
+
+    expect(userId).to.be.a("string");
+    expect(testUsers[userId]).to.be.instanceOf(Object);
+  });
 });
