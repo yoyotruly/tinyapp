@@ -9,7 +9,7 @@ router.use(filterUserUrls);
 
 router.param("shortURL", blockUnauthorizedUser);
 
-/* ------ My URLs Page ------ */
+/* ------ Browse URLs/Add URL ------ */
 router
   .route("/")
   .get((req, res) => {
@@ -28,7 +28,7 @@ router.get("/new", (req, res) => {
   res.render("urls/new");
 });
 
-/* ------ Edit/Delete URL ------ */
+/* ------ Read/Edit/Delete URL ------ */
 router
   .route("/:shortURL")
   .get((req, res) => {
@@ -37,7 +37,7 @@ router
 
     res.render("urls/show", { shortURL, longURL });
   })
-  .post((req, res) => {
+  .put((req, res) => {
     const { shortURL } = req.params;
     const { longURL } = req.body;
     
