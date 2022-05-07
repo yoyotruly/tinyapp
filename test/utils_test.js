@@ -74,11 +74,36 @@ describe("isExistingEmail(email, userDb)", () => {
   });
 });
 
+/* ------ isUserAuthorized Tests ------ */
 describe("isUserAuthorized(userId, value, lookupBy, userDb)", () => {
-  // const userId = 
-  // const lookupBy = "shortURL"
-  // const userDb = testUsers
-  // utils.isUserAuthorized()
+  it("should return true when passed a shortURL that belongs to the userId", () => {
+    const userId = "userRandomID";
+    const value = "b2xVn2";
+    expect(utils.isUserAuthorized(userId, value, "shortURL", testUrls))
+      .to.be.true;
+  });
+
+  it("should return true when passed a shortURL that exists but doesn't belong to the userId", () => {
+    const userId = "userRandomID";
+    const value = "a1Ea5x";
+    expect(utils.isUserAuthorized(userId, value, "shortURL", testUrls))
+      .to.be.false;
+  });
+
+  it("should return true when passed a shortURL that doesn't exist", () => {
+    const userId = "userRandomID";
+    const value = "fakeid";
+    expect(utils.isUserAuthorized(userId, value, "shortURL", testUrls))
+      .to.be.false;
+  });
+
+  it("should return true when passed an empty shortURL or undefined", () => {
+    const userId = "userRandomID";
+    expect(utils.isUserAuthorized(userId, "", "shortURL", testUrls))
+      .to.be.false;
+    expect(utils.isUserAuthorized(userId, undefined, "shortURL", testUrls))
+      .to.be.false;
+  });
 });
 
 /* ------ getUserByLogin Tests ------ */
