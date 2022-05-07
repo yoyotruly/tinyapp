@@ -78,11 +78,11 @@ const getUserById = (id, userDb = users) => {
  * get original long URL by shortened URL.
  * @param {string} shortURL Shortened URL
  * @param {Object} [urlDb=urlDatabase] Database object storing all url info
- * @returns {?string} Returns original long URL if shortURL matches records,
- * returns undefined otherwise
+ * @returns {?Object} Returns URL object if shortURL matches records, otherwise
+ * returns undefined
  */
-const getLongUrlByShortUrl = (shortURL, urlDb = urlDatabase) => {
-  return urlDb[shortURL] && urlDb[shortURL].longURL;
+const getUrlByShortUrl = (shortURL, urlDb = urlDatabase) => {
+  return urlDb[shortURL];
 };
 
 /**
@@ -179,7 +179,7 @@ module.exports = {
   isUserAuthorized,
   getUserByLogin,
   getUserById,
-  getLongUrlByShortUrl,
+  getUrlByShortUrl,
   getUrlsByUserId,
   addNewUrlToDb,
   updateLongUrl,
