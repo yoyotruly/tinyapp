@@ -34,7 +34,6 @@ router
   .get((req, res) => {
     const { shortURL } = req.params;
     const url = getUrlByShortUrl(shortURL);
-    console.log(url);
 
     res.render("urls/show", { shortURL, url });
   })
